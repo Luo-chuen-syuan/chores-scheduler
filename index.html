@@ -13,117 +13,341 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
   <style>
     :root {
-      --macaron-pink: #FFB5C5;
-      --macaron-mint: #B5EAD7;
-      --macaron-lavender: #E2D1F9;
-      --macaron-yellow: #FFE5B4;
-      --macaron-blue: #B5D5FF;
-      --macaron-peach: #FFDAC1;
+      --primary: #f4623a;        /* 活力橙色 */
+      --secondary: #64a19d;      /* 沉穩綠色 */
+      --accent: #ffd3b6;         /* 柔和的蜜桃色 */
+      --background: #f8f9fa;     /* 淺灰色背景 */
+      --text: #212529;          /* 深灰色文字 */
+      --text-light: #6c757d;    /* 淺灰色文字 */
+      --card-bg: #FFFFFF;       /* 純白色卡片 */
+      --shadow: rgba(0, 0, 0, 0.15); /* 更明顯的陰影 */
+      --transition: all 0.3s ease;
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
     body {
-      font-family: 'Microsoft JhengHei', 'Segoe UI', sans-serif;
-      background-color: #FFF5F5;
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.8;
+      letter-spacing: 0.5px;
+      padding-bottom: 4rem;
     }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
     .navbar {
-      background-color: var(--macaron-pink) !important;
+      background-color: transparent !important;
+      padding: 1rem 0;
+      transition: var(--transition);
     }
+
+    .navbar.scrolled {
+      background-color: white !important;
+      box-shadow: 0 0.5rem 1rem var(--shadow);
+    }
+
     .navbar-brand {
-      color: #fff !important;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white !important;
     }
+
+    .navbar.scrolled .navbar-brand {
+      color: var(--primary) !important;
+    }
+
     .nav-link {
-      color: #fff !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      color: white !important;
+      transition: var(--transition);
     }
-    .card {
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+
+    .navbar.scrolled .nav-link {
+      color: var(--text) !important;
     }
-    .card:hover {
-      transform: translateY(-5px);
+
+    .nav-link:hover {
+      color: var(--primary) !important;
     }
-    .benefit-card:nth-child(1) { background-color: var(--macaron-mint); }
-    .benefit-card:nth-child(2) { background-color: var(--macaron-lavender); }
-    .benefit-card:nth-child(3) { background-color: var(--macaron-yellow); }
-    .benefit-card:nth-child(4) { background-color: var(--macaron-blue); }
-    .benefit-card:nth-child(5) { background-color: var(--macaron-peach); }
-    .benefit-card:nth-child(6) { background-color: var(--macaron-pink); }
-    .completed {
-      text-decoration: line-through;
-      color: gray;
-      background-color: #f8f9fa;
-    }
-    .task-cell {
-      transition: all 0.2s ease;
-    }
-    .task-cell:hover {
-      background-color: #f8f9fa;
-    }
-    .benefit-card {
-      transition: transform 0.3s ease;
-    }
-    .benefit-card:hover {
-      transform: translateY(-5px);
-    }
-    .schedule-container {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .schedule-table {
-      min-width: 800px;
-    }
-    .sticky-column {
-      position: sticky;
-      left: 0;
-      background-color: white;
-      z-index: 1;
-    }
-    .hero-image {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 15px;
-      margin-bottom: 2rem;
-    }
-    .section-title {
-      color: #FF6B6B;
-      margin-bottom: 2rem;
-      text-align: center;
+
+    .hero-section {
       position: relative;
+      height: 100vh;
+      min-height: 500px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
     }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      background-color: #e34f2a;
+      border-color: #e34f2a;
+      transform: translateY(-3px);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      position: relative;
+      text-align: center;
+    }
+
     .section-title::after {
       content: '';
       display: block;
-      width: 50px;
-      height: 3px;
-      background-color: #FF6B6B;
-      margin: 10px auto;
+      width: 100px;
+      height: 4px;
+      background: var(--primary);
+      margin: 1rem auto;
     }
-    .btn-primary {
-      background-color: var(--macaron-pink);
-      border-color: var(--macaron-pink);
+
+    .card {
+      border: none;
+      border-radius: 0;
+      box-shadow: 0 0.5rem 1rem var(--shadow);
+      transition: var(--transition);
+      margin-bottom: 2rem;
     }
-    .btn-success {
-      background-color: var(--macaron-mint);
-      border-color: var(--macaron-mint);
+
+    .card:hover {
+      transform: translateY(-10px);
     }
-    .btn-warning {
-      background-color: var(--macaron-yellow);
-      border-color: var(--macaron-yellow);
-      color: #333;
+
+    .benefit-card {
+      height: 100%;
+      text-align: center;
     }
-    .badge {
-      border-radius: 15px;
-      padding: 0.5rem 1rem;
+
+    .benefit-card img {
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
     }
+
+    .benefit-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .benefit-card .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .benefit-card .card-text {
+      color: var(--text-light);
+      font-size: 1.1rem;
+    }
+
+    .form-control, .form-select {
+      border-radius: 0;
+      border: none;
+      border-bottom: 2px solid #dee2e6;
+      padding: 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+      box-shadow: none;
+      border-color: var(--primary);
+    }
+
+    .list-group-item {
+      border: none;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      background-color: var(--background);
+      transition: var(--transition);
+    }
+
+    .list-group-item:hover {
+      background-color: white;
+      transform: translateX(10px);
+    }
+
     .footer {
-      background-color: var(--macaron-lavender);
-      color: #333;
+      background-color: var(--text);
+      color: white;
+      padding: 4rem 0;
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.25rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    /* 添加滾動動畫 */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .schedule-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 2rem 0;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px var(--shadow);
+      background-color: white;
+    }
+
+    .schedule-table {
+      min-width: 800px;
+      margin: 0;
+    }
+
+    .schedule-table th {
+      background-color: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 1rem;
+      text-align: center;
+      border: none;
+    }
+
+    .schedule-table td {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #e0e0e0;
+      transition: var(--transition);
+    }
+
+    .schedule-table tr:hover td {
+      background-color: #f8f9fa;
+    }
+
+    .sticky-column {
+      position: sticky;
+      left: 0;
+      background-color: var(--card-bg);
+      z-index: 1;
+      font-weight: 600;
+    }
+
+    .task-cell {
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .task-cell:hover {
+      background-color: var(--background) !important;
+      transform: scale(1.05);
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: #666;
+      background-color: var(--background);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .form-text {
+      color: #666;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    .input-group {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .input-group .form-control {
+      border-right: none;
+    }
+
+    .input-group .btn {
+      border-left: none;
+      padding: 0.75rem 1.5rem;
+    }
+
+    .table-responsive {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .schedule-table th,
+      .schedule-table td {
+        padding: 0.75rem;
+        font-size: 0.875rem;
+      }
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="#">
         <i class="bi bi-broom me-2"></i>
@@ -138,6 +362,9 @@
             <a class="nav-link" href="#benefits">家事好處</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#tips">家事妙招</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#schedule">輪班表</a>
           </li>
         </ul>
@@ -145,82 +372,72 @@
     </div>
   </nav>
 
-  <div class="container">
-    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="家庭清潔" class="hero-image">
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1 class="display-4 fw-bold mb-3">讓家事分配更公平</h1>
+      <p class="lead mb-4">輕鬆管理家庭事務，增進家人感情</p>
+      <a href="#schedule" class="btn btn-primary btn-lg">
+        <i class="bi bi-play-circle me-2"></i>開始使用
+      </a>
+    </div>
+  </header>
 
+  <main class="container py-5">
     <!-- 家事好處 -->
-    <section id="benefits" class="mb-5">
+    <section id="benefits" class="py-5">
       <h2 class="section-title">作家事的好處</h2>
       <div class="row g-4">
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100">
-            <div class="card-body">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top mb-3" alt="責任感">
-              <h3 class="card-title">
-                <i class="bi bi-check-circle-fill me-2"></i>
-                培養責任感
-              </h3>
-              <p class="card-text">定期完成家事可以培養責任感和自律性，讓家庭成員學會承擔責任。</p>
+          <div class="card benefit-card h-100 fade-in">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/4207/4207247.png" class="card-img-top mb-3" alt="責任感" style="height: 150px; object-fit: contain;">
+              <h5 class="card-title">培養責任感</h5>
+              <p class="card-text">讓孩子參與家務，培養責任感和獨立性，為未來生活做好準備。</p>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100">
-            <div class="card-body">
-              <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top mb-3" alt="家庭和諧">
-              <h3 class="card-title">
-                <i class="bi bi-people-fill me-2"></i>
-                增進家庭和諧
-              </h3>
-              <p class="card-text">共同分擔家事可以減少家庭成員間的摩擦，增進彼此的理解和合作。</p>
+          <div class="card benefit-card h-100 fade-in">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/7066/7066140.png" class="card-img-top mb-3" alt="家庭和諧" style="height: 150px; object-fit: contain;">
+              <h5 class="card-title">增進家庭和諧</h5>
+              <p class="card-text">共同分擔家務，增進家人間的合作與理解，營造溫馨的家庭氛圍。</p>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100">
-            <div class="card-body">
-              <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top mb-3" alt="生活技能">
-              <h3 class="card-title">
-                <i class="bi bi-tools me-2"></i>
-                提升生活技能
-              </h3>
-              <p class="card-text">學習各種家事技巧，培養獨立生活的能力，為未來做好準備。</p>
+          <div class="card benefit-card h-100 fade-in">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/4185/4185461.png" class="card-img-top mb-3" alt="生活技能" style="height: 150px; object-fit: contain;">
+              <h5 class="card-title">提升生活技能</h5>
+              <p class="card-text">學習實用的生活技能，為獨立生活打下堅實基礎。</p>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100">
-            <div class="card-body">
-              <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top mb-3" alt="身心健康">
-              <h3 class="card-title">
-                <i class="bi bi-heart-fill me-2"></i>
-                促進身心健康
-              </h3>
-              <p class="card-text">適度的家事勞動可以幫助保持身體健康，同時也能減輕壓力。</p>
+          <div class="card benefit-card h-100 fade-in">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/2382/2382461.png" class="card-img-top mb-3" alt="身心健康" style="height: 150px; object-fit: contain;">
+              <h5 class="card-title">促進身心健康</h5>
+              <p class="card-text">適度的家務勞動可以鍛煉身體，同時培養積極的生活態度。</p>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100">
-            <div class="card-body">
-              <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top mb-3" alt="良好習慣">
-              <h3 class="card-title">
-                <i class="bi bi-clock-fill me-2"></i>
-                建立良好習慣
-              </h3>
-              <p class="card-text">規律的家事安排有助於建立良好的生活習慣和時間管理能力。</p>
+          <div class="card benefit-card h-100 fade-in">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/4575/4575590.png" class="card-img-top mb-3" alt="良好習慣" style="height: 150px; object-fit: contain;">
+              <h5 class="card-title">建立良好習慣</h5>
+              <p class="card-text">規律的家務安排幫助孩子養成良好的生活習慣和時間管理能力。</p>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100">
-            <div class="card-body">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top mb-3" alt="成就感">
-              <h3 class="card-title">
-                <i class="bi bi-emoji-smile-fill me-2"></i>
-                增強成就感
-              </h3>
-              <p class="card-text">完成家事後看到整潔的環境，能帶來成就感和滿足感。</p>
+          <div class="card benefit-card h-100 fade-in">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/9794/9794086.png" class="card-img-top mb-3" alt="成就感" style="height: 150px; object-fit: contain;">
+              <h5 class="card-title">增加成就感</h5>
+              <p class="card-text">完成家務任務帶來的成就感，增強自信心和自我價值感。</p>
             </div>
           </div>
         </div>
@@ -228,29 +445,29 @@
     </section>
 
     <!-- 進度追蹤 -->
-    <section class="mb-5">
-      <div class="card" style="background-color: var(--macaron-peach);">
-        <div class="card-body">
+    <section class="py-5">
+      <div class="card fade-in">
+        <div class="card-body p-4">
           <h2 class="section-title">本週進度</h2>
-          <div class="row">
-            <div class="col-12 col-md-6 mb-4">
+          <div class="row g-4">
+            <div class="col-12 col-md-6">
               <div class="card h-100">
                 <div class="card-body">
-                  <h3 class="card-title text-center mb-3">
-                    <i class="bi bi-graph-up me-2"></i>完成率統計
+                  <h3 class="card-title text-center mb-4">
+                    <i class="bi bi-graph-up me-2 text-primary"></i>完成率統計
                   </h3>
-                  <div class="progress mb-3" style="height: 25px;">
-                    <div class="progress-bar bg-success" role="progressbar" id="completion-rate" style="width: 0%"></div>
+                  <div class="progress mb-3">
+                    <div class="progress-bar" role="progressbar" id="completion-rate" style="width: 0%"></div>
                   </div>
                   <p class="text-center mb-0" id="completion-text">本週已完成 0% 的家事</p>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-6 mb-4">
+            <div class="col-12 col-md-6">
               <div class="card h-100">
                 <div class="card-body">
-                  <h3 class="card-title text-center mb-3">
-                    <i class="bi bi-trophy me-2"></i>積分排行榜
+                  <h3 class="card-title text-center mb-4">
+                    <i class="bi bi-trophy me-2 text-warning"></i>積分排行榜
                   </h3>
                   <div id="leaderboard" class="list-group">
                     <!-- 排行榜將由 JavaScript 動態生成 -->
@@ -263,11 +480,11 @@
       </div>
     </section>
 
-    <!-- 家事小貼士 -->
-    <section class="mb-5">
-      <div class="card" style="background-color: var(--macaron-mint);">
+    <!-- 家事妙招 -->
+    <section id="tips" class="mb-5">
+      <div class="card" style="background-color: var(--matcha);">
         <div class="card-body">
-          <h2 class="section-title">家事小貼士</h2>
+          <h2 class="section-title">家事妙招</h2>
           <div class="row">
             <div class="col-12 col-md-4 mb-4">
               <div class="card h-100">
@@ -303,7 +520,7 @@
 
     <!-- 獎勵系統 -->
     <section class="mb-5">
-      <div class="card" style="background-color: var(--macaron-lavender);">
+      <div class="card" style="background-color: var(--earl-grey);">
         <div class="card-body">
           <h2 class="section-title">獎勵系統</h2>
           <div class="row">
@@ -360,7 +577,7 @@
 
     <!-- 成員管理 -->
     <section id="members" class="mb-5">
-      <div class="card" style="background-color: var(--macaron-mint);">
+      <div class="card" style="background-color: var(--matcha);">
         <div class="card-body">
           <h2 class="section-title">家庭成員</h2>
           <div class="d-flex flex-wrap gap-2 mb-3" id="member-list"></div>
@@ -369,7 +586,7 @@
               <input type="text" id="new-member" class="form-control" placeholder="輸入新成員名稱">
             </div>
             <div class="col-12 col-md-4">
-              <button onclick="addMember()" class="btn btn-primary w-100">
+              <button id="add-member-btn" class="btn btn-primary w-100">
                 <i class="bi bi-person-plus-fill me-2"></i>新增成員
               </button>
             </div>
@@ -378,9 +595,39 @@
       </div>
     </section>
 
+    <!-- LINE 通知設置 -->
+    <section id="line-settings" class="mb-5">
+      <div class="card" style="background-color: var(--milk-foam);">
+        <div class="card-body">
+          <h2 class="section-title">LINE 通知設置</h2>
+          <div class="row g-2">
+            <div class="col-12 col-md-8">
+              <input type="text" id="line-token" class="form-control" placeholder="輸入 LINE Messaging API Channel Access Token">
+            </div>
+            <div class="col-12 col-md-4">
+              <button id="save-line-token" class="btn btn-primary w-100">
+                <i class="bi bi-check-circle-fill me-2"></i>保存 Token
+              </button>
+            </div>
+          </div>
+          <div class="mt-3">
+            <a href="https://developers.line.biz/console/" target="_blank" rel="noopener" class="btn btn-outline-primary">
+              <i class="bi bi-line me-2"></i>獲取 LINE Messaging API Token
+            </a>
+          </div>
+          <div class="mt-3">
+            <p class="text-muted small">
+              <i class="bi bi-info-circle me-2"></i>
+              請先註冊 LINE Developers 帳號，創建 Messaging API Channel 後獲取 Channel Access Token
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 家事管理 -->
     <section id="tasks" class="mb-5">
-      <div class="card" style="background-color: var(--macaron-lavender);">
+      <div class="card" style="background-color: var(--earl-grey);">
         <div class="card-body">
           <h2 class="section-title">家事項目</h2>
           <div class="d-flex flex-wrap gap-2 mb-3" id="task-list"></div>
@@ -389,7 +636,7 @@
               <input type="text" id="new-task" class="form-control" placeholder="輸入家事名稱">
             </div>
             <div class="col-12 col-md-4">
-              <button onclick="addTask()" class="btn btn-success w-100">
+              <button id="add-task-btn" class="btn btn-success w-100">
                 <i class="bi bi-plus-circle-fill me-2"></i>新增家事
               </button>
             </div>
@@ -400,7 +647,7 @@
 
     <!-- 時間範圍切換 -->
     <section id="schedule" class="mb-5">
-      <div class="card" style="background-color: var(--macaron-yellow);">
+      <div class="card" style="background-color: var(--milk-foam);">
         <div class="card-body">
           <h2 class="section-title">排程時間範圍</h2>
           <select id="range" class="form-select" aria-label="選擇排程時間範圍">
@@ -413,14 +660,14 @@
 
     <!-- 輪班表生成 -->
     <section class="mb-5">
-      <div class="card" style="background-color: var(--macaron-blue);">
+      <div class="card" style="background-color: var(--bubble);">
         <div class="card-body">
           <h2 class="section-title">生成輪班表</h2>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
             <button onclick="generateSchedule()" class="btn btn-primary me-md-2">
               <i class="bi bi-table me-2"></i>生成表格
             </button>
-            <button onclick="downloadSchedule()" class="btn btn-warning">
+            <button id="download-schedule" class="btn btn-warning">
               <i class="bi bi-download me-2"></i>下載圖片
             </button>
           </div>
@@ -430,187 +677,244 @@
         </div>
       </div>
     </section>
-  </div>
+  </main>
 
-  <footer class="footer py-4 mt-5">
-    <div class="container text-center">
+  <footer class="footer text-center py-4">
+    <div class="container">
       <p class="mb-0">© 2024 家事輪班表生成器 | 讓家事分配更公平</p>
     </div>
   </footer>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
-    let members = JSON.parse(localStorage.getItem('members')) || [];
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    let completed = JSON.parse(localStorage.getItem('completed')) || {};
-    let points = JSON.parse(localStorage.getItem('points')) || {};
+    $(document).ready(function() {
+      // 初始化數據
+      let members = JSON.parse(localStorage.getItem('members')) || [];
+      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      let completed = JSON.parse(localStorage.getItem('completed')) || {};
+      let points = JSON.parse(localStorage.getItem('points')) || {};
+      let lineToken = localStorage.getItem('lineToken') || '';
 
-    function saveData() {
-      localStorage.setItem('members', JSON.stringify(members));
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-      localStorage.setItem('completed', JSON.stringify(completed));
-      localStorage.setItem('points', JSON.stringify(points));
-    }
+      // 保存數據到 localStorage
+      function saveData() {
+        localStorage.setItem('members', JSON.stringify(members));
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        localStorage.setItem('completed', JSON.stringify(completed));
+        localStorage.setItem('points', JSON.stringify(points));
+        localStorage.setItem('lineToken', lineToken);
+      }
 
-    function addMember() {
-      const name = document.getElementById('new-member').value.trim();
-      if (name && !members.includes(name)) {
-        members.push(name);
-        points[name] = 0;
-        document.getElementById('new-member').value = '';
+      // 添加成員
+      $('#add-member-btn').on('click', function() {
+        const name = $('#new-member').val().trim();
+        if (name && !members.includes(name)) {
+          members.push(name);
+          points[name] = 0;
+          $('#new-member').val('');
+          saveData();
+          renderMembers();
+        }
+      });
+
+      // 渲染成員列表
+      function renderMembers() {
+        const container = $('#member-list');
+        container.html(''); // 使用 html() 替代 empty()
+        members.forEach(name => {
+          const point = points[name] || 0;
+          container.append(`
+            <span class="badge bg-primary">${name}（${point} 分）</span>
+          `);
+        });
+      }
+
+      // 添加任務
+      $('#add-task-btn').on('click', function() {
+        const task = $('#new-task').val().trim();
+        if (task && !tasks.includes(task)) {
+          tasks.push(task);
+          $('#new-task').val('');
+          saveData();
+          renderTasks();
+        }
+      });
+
+      // 渲染任務列表
+      function renderTasks() {
+        const container = $('#task-list');
+        container.html(''); // 使用 html() 替代 empty()
+        tasks.forEach(task => {
+          container.append(`
+            <span class="badge bg-success">${task}</span>
+          `);
+        });
+      }
+
+      // 保存 LINE Token
+      $('#save-line-token').on('click', function() {
+        const token = $('#line-token').val().trim();
+        if (token) {
+          lineToken = token;
+          saveData();
+          alert('LINE Token 已保存！');
+        }
+      });
+
+      // LINE 通知功能
+      async function sendLineNotification(message) {
+        if (!lineToken) {
+          console.log('LINE Token 未設置');
+          return;
+        }
+
+        try {
+          const response = await fetch('https://api.line.me/v2/bot/message/push', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${lineToken}`
+            },
+            body: JSON.stringify({
+              to: 'YOUR_USER_ID', // 需要替換為實際的用戶 ID
+              messages: [
+                {
+                  type: 'text',
+                  text: message
+                }
+              ]
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error('發送通知失敗');
+          }
+        } catch (error) {
+          console.error('發送 LINE 通知時發生錯誤:', error);
+        }
+      }
+
+      // 切換完成狀態
+      function toggleComplete(id, member) {
+        completed[id] = !completed[id];
+        if (completed[id]) {
+          points[member] = (points[member] || 0) + 1;
+          const task = id.split('-')[0];
+          sendLineNotification(`${member} 已完成家事：${task}！\n目前積分：${points[member]} 分`);
+        } else {
+          points[member] = Math.max(0, (points[member] || 0) - 1);
+        }
         saveData();
         renderMembers();
+        generateSchedule();
+        updateProgress();
+        updateLeaderboard();
       }
-    }
 
-    function renderMembers() {
-      const container = document.getElementById('member-list');
-      container.innerHTML = '';
-      members.forEach(name => {
-        const badge = document.createElement('span');
-        const point = points[name] || 0;
-        badge.textContent = `${name}（${point} 分）`;
-        badge.className = 'badge bg-primary';
-        container.appendChild(badge);
+      // 生成輪班表
+      function generateSchedule() {
+        const days7 = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
+        const range = parseInt($('#range').val());
+        const days = Array.from({length: range}, (_, i) => range === 7 ? days7[i] : `第 ${i + 1} 天`);
+
+        const table = $('<table>').addClass('table table-bordered table-hover');
+        const thead = $('<thead>');
+        const headerRow = $('<tr>');
+        headerRow.append('<th class="sticky-column">家事</th>');
+        days.forEach(day => headerRow.append(`<th>${day}</th>`));
+        thead.append(headerRow);
+
+        const tbody = $('<tbody>');
+        tasks.forEach((task, index) => {
+          const row = $('<tr>');
+          row.append(`<td class="sticky-column">${task}</td>`);
+          for (let i = 0; i < range; i++) {
+            const member = members[(index + i) % members.length] || '-';
+            const id = `${task}-${i}`;
+            const checked = completed[id] ? 'completed' : '';
+            const cell = $(`<td class="task-cell ${checked}">${member}</td>`);
+            cell.on('click', function() {
+              toggleComplete(id, member);
+            });
+            row.append(cell);
+          }
+          tbody.append(row);
+        });
+
+        table.append(thead).append(tbody);
+        $('#schedule-table').html('').append(table);
+      }
+
+      // 下載輪班表
+      $('#download-schedule').on('click', function() {
+        html2canvas(document.getElementById('schedule-table')).then(canvas => {
+          const link = document.createElement('a');
+          link.download = '家事輪班表.png';
+          link.href = canvas.toDataURL();
+          link.click();
+        });
       });
-    }
 
-    function addTask() {
-      const task = document.getElementById('new-task').value.trim();
-      if (task && !tasks.includes(task)) {
-        tasks.push(task);
-        document.getElementById('new-task').value = '';
-        saveData();
-        renderTasks();
+      // 更新進度
+      function updateProgress() {
+        const totalTasks = tasks.length * 7;
+        let completedTasks = 0;
+        
+        for (const id in completed) {
+          if (completed[id]) completedTasks++;
+        }
+        
+        const completionRate = Math.round((completedTasks / totalTasks) * 100);
+        $('#completion-rate').css('width', `${completionRate}%`);
+        $('#completion-text').text(`本週已完成 ${completionRate}% 的家事`);
       }
-    }
 
-    function renderTasks() {
-      const container = document.getElementById('task-list');
-      container.innerHTML = '';
-      tasks.forEach(task => {
-        const badge = document.createElement('span');
-        badge.textContent = task;
-        badge.className = 'badge bg-success';
-        container.appendChild(badge);
+      // 更新排行榜
+      function updateLeaderboard() {
+        const leaderboard = $('#leaderboard');
+        leaderboard.html(''); // 使用 html() 替代 empty()
+        
+        const sortedMembers = Object.entries(points)
+          .sort((a, b) => b[1] - a[1])
+          .map(([name, points]) => `
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>${name}</span>
+              <span class="badge bg-primary rounded-pill">${points} 分</span>
+            </div>
+          `);
+        
+        leaderboard.append(sortedMembers);
+      }
+
+      // 平滑滾動
+      $('a[href^="#"]').on('click', function(e) {
+        e.preventDefault();
+        const target = $(this.hash);
+        if (target.length) {
+          $('html, body').animate({
+            scrollTop: target.offset().top - 70
+          }, 800);
+        }
       });
-    }
 
-    function toggleComplete(id, member) {
-      completed[id] = !completed[id];
-      if (completed[id]) {
-        points[member] = (points[member] || 0) + 1;
-      } else {
-        points[member] = Math.max(0, (points[member] || 0) - 1);
-      }
-      saveData();
+      // 導航欄滾動效果
+      $(window).on('scroll', function() {
+        if ($(window).scrollTop() > 100) {
+          $('.navbar').addClass('scrolled');
+        } else {
+          $('.navbar').removeClass('scrolled');
+        }
+      });
+
+      // 初始化頁面
       renderMembers();
+      renderTasks();
       generateSchedule();
       updateProgress();
       updateLeaderboard();
-    }
-
-    function generateSchedule() {
-      const days7 = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
-      const range = parseInt(document.getElementById('range').value);
-      const days = Array.from({length: range}, (_, i) => range === 7 ? days7[i] : `第 ${i + 1} 天`);
-
-      const table = document.createElement('table');
-      table.className = 'table table-bordered table-hover';
-
-      const thead = document.createElement('thead');
-      const headerRow = document.createElement('tr');
-      headerRow.innerHTML = '<th class="sticky-column">家事</th>' + 
-        days.map(day => `<th>${day}</th>`).join('');
-      thead.appendChild(headerRow);
-
-      const tbody = document.createElement('tbody');
-      tasks.forEach((task, index) => {
-        const row = document.createElement('tr');
-        let rowHTML = `<td class="sticky-column">${task}</td>`;
-        for (let i = 0; i < range; i++) {
-          const member = members[(index + i) % members.length] || '-';
-          const id = `${task}-${i}`;
-          const checked = completed[id] ? 'completed' : '';
-          rowHTML += `<td class="task-cell ${checked}" onclick="toggleComplete('${id}', '${member}')">${member}</td>`;
-        }
-        row.innerHTML = rowHTML;
-        tbody.appendChild(row);
-      });
-
-      table.appendChild(thead);
-      table.appendChild(tbody);
-
-      const container = document.getElementById('schedule-table');
-      container.innerHTML = '';
-      container.appendChild(table);
-    }
-
-    function downloadSchedule() {
-      html2canvas(document.getElementById('schedule-table')).then(canvas => {
-        const link = document.createElement('a');
-        link.download = '家事輪班表.png';
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    }
-
-    // 每日提醒通知（需使用者允許）
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission();
-    } else {
-      dailyReminder();
-    }
-
-    function dailyReminder() {
-      const todayIndex = new Date().getDay() - 1; // 0 = Sun
-      if (todayIndex < 0 || todayIndex > 6) return;
-      tasks.forEach((task, index) => {
-        const member = members[(index + todayIndex) % members.length] || '-';
-        new Notification('今日家事提醒', { body: `${member}，今天要做「${task}」唷！` });
-      });
-    }
-
-    // 更新進度追蹤
-    function updateProgress() {
-      const totalTasks = tasks.length * 7; // 每週7天
-      let completedTasks = 0;
-      
-      for (const id in completed) {
-        if (completed[id]) completedTasks++;
-      }
-      
-      const completionRate = Math.round((completedTasks / totalTasks) * 100);
-      document.getElementById('completion-rate').style.width = `${completionRate}%`;
-      document.getElementById('completion-text').textContent = `本週已完成 ${completionRate}% 的家事`;
-    }
-
-    // 更新排行榜
-    function updateLeaderboard() {
-      const leaderboard = document.getElementById('leaderboard');
-      leaderboard.innerHTML = '';
-      
-      const sortedMembers = Object.entries(points)
-        .sort((a, b) => b[1] - a[1])
-        .map(([name, points]) => {
-          const item = document.createElement('div');
-          item.className = 'list-group-item d-flex justify-content-between align-items-center';
-          item.innerHTML = `
-            <span>${name}</span>
-            <span class="badge bg-primary rounded-pill">${points} 分</span>
-          `;
-          return item;
-        });
-      
-      leaderboard.append(...sortedMembers);
-    }
-
-    renderMembers();
-    renderTasks();
-    generateSchedule();
-    updateProgress();
-    updateLeaderboard();
+    });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </body>
