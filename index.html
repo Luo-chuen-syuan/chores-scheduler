@@ -344,6 +344,19 @@
         font-size: 0.875rem;
       }
     }
+
+    .task-cell.completed {
+      background-color: #e8f5e9;
+    }
+
+    .task-cell.completed span {
+      text-decoration: line-through;
+      color: #666;
+    }
+
+    .toast {
+      z-index: 1050;
+    }
   </style>
 </head>
 <body>
@@ -358,9 +371,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#benefits">家事好處</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="#tips">家事妙招</a>
           </li>
@@ -382,7 +392,7 @@
     </div>
   </header>
 
-
+  <main class="container py-5">
     <!-- 進度追蹤 -->
     <section class="py-5">
       <div class="card fade-in">
@@ -469,18 +479,66 @@
                   <h3 class="card-title text-center mb-3">
                     <i class="bi bi-gift me-2"></i>可兌換獎勵
                   </h3>
-                  <div class="list-group">
+                  <div class="list-group" id="rewards-list">
                     <div class="list-group-item d-flex justify-content-between align-items-center">
-                      選擇一週的晚餐
-                      <span class="badge bg-primary rounded-pill">50 分</span>
+                      <div>
+                        <h5 class="mb-1">選擇一週的晚餐</h5>
+                        <p class="mb-0 text-muted small">可以選擇一週的晚餐菜單</p>
+                      </div>
+                      <div class="text-end">
+                        <span class="badge bg-primary rounded-pill">50 分</span>
+                        <button class="btn btn-sm btn-outline-primary ms-2" onclick="redeemReward('選擇一週的晚餐', 50)">
+                          兌換
+                        </button>
+                      </div>
                     </div>
                     <div class="list-group-item d-flex justify-content-between align-items-center">
-                      免做家事一天
-                      <span class="badge bg-primary rounded-pill">30 分</span>
+                      <div>
+                        <h5 class="mb-1">免做家事一天</h5>
+                        <p class="mb-0 text-muted small">可以選擇一天不用做任何家事</p>
+                      </div>
+                      <div class="text-end">
+                        <span class="badge bg-primary rounded-pill">30 分</span>
+                        <button class="btn btn-sm btn-outline-primary ms-2" onclick="redeemReward('免做家事一天', 30)">
+                          兌換
+                        </button>
+                      </div>
                     </div>
                     <div class="list-group-item d-flex justify-content-between align-items-center">
-                      選擇週末活動
-                      <span class="badge bg-primary rounded-pill">40 分</span>
+                      <div>
+                        <h5 class="mb-1">選擇週末活動</h5>
+                        <p class="mb-0 text-muted small">可以選擇週末的活動內容</p>
+                      </div>
+                      <div class="text-end">
+                        <span class="badge bg-primary rounded-pill">40 分</span>
+                        <button class="btn btn-sm btn-outline-primary ms-2" onclick="redeemReward('選擇週末活動', 40)">
+                          兌換
+                        </button>
+                      </div>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                      <div>
+                        <h5 class="mb-1">額外零用錢</h5>
+                        <p class="mb-0 text-muted small">獲得額外的零用錢</p>
+                      </div>
+                      <div class="text-end">
+                        <span class="badge bg-primary rounded-pill">20 分</span>
+                        <button class="btn btn-sm btn-outline-primary ms-2" onclick="redeemReward('額外零用錢', 20)">
+                          兌換
+                        </button>
+                      </div>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                      <div>
+                        <h5 class="mb-1">選擇電影</h5>
+                        <p class="mb-0 text-muted small">可以選擇一部電影全家一起看</p>
+                      </div>
+                      <div class="text-end">
+                        <span class="badge bg-primary rounded-pill">25 分</span>
+                        <button class="btn btn-sm btn-outline-primary ms-2" onclick="redeemReward('選擇電影', 25)">
+                          兌換
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -492,18 +550,41 @@
                   <h3 class="card-title text-center mb-3">
                     <i class="bi bi-star me-2"></i>成就系統
                   </h3>
-                  <div class="list-group">
+                  <div class="list-group" id="achievements-list">
                     <div class="list-group-item d-flex justify-content-between align-items-center">
-                      連續完成一週
+                      <div>
+                        <h5 class="mb-1">連續完成一週</h5>
+                        <p class="mb-0 text-muted small">連續一週完成所有分配的家事</p>
+                      </div>
                       <i class="bi bi-trophy-fill text-warning"></i>
                     </div>
                     <div class="list-group-item d-flex justify-content-between align-items-center">
-                      完成所有家事
+                      <div>
+                        <h5 class="mb-1">完成所有家事</h5>
+                        <p class="mb-0 text-muted small">完成當週所有分配的家事</p>
+                      </div>
                       <i class="bi bi-award-fill text-warning"></i>
                     </div>
                     <div class="list-group-item d-flex justify-content-between align-items-center">
-                      幫助他人完成
+                      <div>
+                        <h5 class="mb-1">幫助他人完成</h5>
+                        <p class="mb-0 text-muted small">幫助其他家庭成員完成家事</p>
+                      </div>
                       <i class="bi bi-heart-fill text-danger"></i>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                      <div>
+                        <h5 class="mb-1">積分達人</h5>
+                        <p class="mb-0 text-muted small">累積獲得 100 分</p>
+                      </div>
+                      <i class="bi bi-coin-fill text-warning"></i>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                      <div>
+                        <h5 class="mb-1">家事達人</h5>
+                        <p class="mb-0 text-muted small">完成 50 項家事</p>
+                      </div>
+                      <i class="bi bi-house-fill text-success"></i>
                     </div>
                   </div>
                 </div>
@@ -650,24 +731,46 @@
       // 添加成員
       $('#add-member-btn').on('click', function() {
         const name = $('#new-member').val().trim();
-      if (name && !members.includes(name)) {
-        members.push(name);
-        points[name] = 0;
+        if (name && !members.includes(name)) {
+          members.push(name);
+          points[name] = 0;
           $('#new-member').val('');
-        saveData();
-        renderMembers();
-      }
+          saveData();
+          renderMembers();
+          generateSchedule();
+          updateLeaderboard();
+          updateAchievements();
+        } else if (members.includes(name)) {
+          alert('該成員已存在！');
+        }
       });
 
       // 渲染成員列表
-    function renderMembers() {
+      function renderMembers() {
         const container = $('#member-list');
         container.empty();
-      members.forEach(name => {
-        const point = points[name] || 0;
-          const badge = $('<span>')
-            .addClass('badge bg-primary me-2')
-            .text(`${name}（${point} 分）`);
+        members.forEach(name => {
+          const point = points[name] || 0;
+          const badge = $('<div>')
+            .addClass('badge bg-primary me-2 mb-2 d-inline-flex align-items-center')
+            .append(
+              $('<span>').text(`${name}（${point} 分）`),
+              $('<button>')
+                .addClass('btn btn-sm btn-danger ms-2')
+                .html('<i class="bi bi-x"></i>')
+                .on('click', function(e) {
+                  e.stopPropagation();
+                  if (confirm(`確定要刪除成員 ${name} 嗎？`)) {
+                    members = members.filter(m => m !== name);
+                    delete points[name];
+                    saveData();
+                    renderMembers();
+                    generateSchedule();
+                    updateLeaderboard();
+                    updateAchievements();
+                  }
+                })
+            );
           container.append(badge);
         });
       }
@@ -675,12 +778,17 @@
       // 添加任務
       $('#add-task-btn').on('click', function() {
         const task = $('#new-task').val().trim();
-      if (task && !tasks.includes(task)) {
-        tasks.push(task);
+        if (task && !tasks.includes(task)) {
+          tasks.push(task);
           $('#new-task').val('');
-        saveData();
-        renderTasks();
-      }
+          saveData();
+          renderTasks();
+          generateSchedule();
+          updateProgress();
+          updateAchievements();
+        } else if (tasks.includes(task)) {
+          alert('該家事已存在！');
+        }
       });
 
       // 渲染任務列表
@@ -688,9 +796,31 @@
         const container = $('#task-list');
         container.empty();
         tasks.forEach(task => {
-          const badge = $('<span>')
-            .addClass('badge bg-success me-2')
-            .text(task);
+          const badge = $('<div>')
+            .addClass('badge bg-success me-2 mb-2 d-inline-flex align-items-center')
+            .append(
+              $('<span>').text(task),
+              $('<button>')
+                .addClass('btn btn-sm btn-danger ms-2')
+                .html('<i class="bi bi-x"></i>')
+                .on('click', function(e) {
+                  e.stopPropagation();
+                  if (confirm(`確定要刪除家事 ${task} 嗎？`)) {
+                    tasks = tasks.filter(t => t !== task);
+                    // 刪除相關的完成記錄
+                    Object.keys(completed).forEach(key => {
+                      if (key.startsWith(task)) {
+                        delete completed[key];
+                      }
+                    });
+                    saveData();
+                    renderTasks();
+                    generateSchedule();
+                    updateProgress();
+                    updateAchievements();
+                  }
+                })
+            );
           container.append(badge);
         });
       }
@@ -709,22 +839,41 @@
       function toggleComplete(id, member) {
         completed[id] = !completed[id];
         if (completed[id]) {
-          points[member] = (points[member] || 0) + 1;
+          points[member] = (points[member] || 0) + 10; // 完成加10分
+          const task = id.split('-')[0];
+          // 顯示完成提示
+          const toast = $('<div>')
+            .addClass('toast show position-fixed bottom-0 end-0 m-3')
+            .attr('role', 'alert')
+            .html(`
+              <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">完成通知</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+              </div>
+              <div class="toast-body">
+                ${member} 已完成家事：${task}<br>
+                獲得 10 分！目前積分：${points[member]} 分
+              </div>
+            `);
+          $('body').append(toast);
+          setTimeout(() => toast.remove(), 3000);
         } else {
-          points[member] = Math.max(0, (points[member] || 0) - 1);
+          points[member] = Math.max(0, (points[member] || 0) - 10); // 取消完成減10分
         }
         saveData();
         renderMembers();
         generateSchedule();
         updateProgress();
         updateLeaderboard();
+        updateAchievements();
       }
 
       // 生成輪班表
-    function generateSchedule() {
-      const days7 = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
+      function generateSchedule() {
+        const days7 = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
         const range = parseInt($('#range').val());
-      const days = Array.from({length: range}, (_, i) => range === 7 ? days7[i] : `第 ${i + 1} 天`);
+        const days = Array.from({length: range}, (_, i) => range === 7 ? days7[i] : `第 ${i + 1} 天`);
 
         const table = $('<table>').addClass('table table-bordered table-hover');
         const thead = $('<thead>');
@@ -738,16 +887,28 @@
           const row = $('<tr>');
           row.append($('<td>').addClass('sticky-column').text(task));
           
-        for (let i = 0; i < range; i++) {
-          const member = members[(index + i) % members.length] || '-';
-          const id = `${task}-${i}`;
-          const checked = completed[id] ? 'completed' : '';
+          for (let i = 0; i < range; i++) {
+            const member = members[(index + i) % members.length] || '-';
+            const id = `${task}-${i}`;
+            const checked = completed[id] ? 'completed' : '';
             const cell = $('<td>')
               .addClass(`task-cell ${checked}`)
-              .text(member)
-              .on('click', function() {
-                toggleComplete(id, member);
-              });
+              .append(
+                $('<div>').addClass('d-flex justify-content-between align-items-center')
+                  .append(
+                    $('<span>').text(member),
+                    $('<div>').addClass('form-check')
+                      .append(
+                        $('<input>')
+                          .addClass('form-check-input')
+                          .attr('type', 'checkbox')
+                          .prop('checked', completed[id])
+                          .on('change', function() {
+                            toggleComplete(id, member);
+                          })
+                      )
+                  )
+              );
             row.append(cell);
           }
           
@@ -810,19 +971,35 @@
         e.preventDefault();
         const target = $(this.hash);
         if (target.length) {
+          const offset = target.offset().top - 70; // 減去導航欄高度
           $('html, body').animate({
-            scrollTop: target.offset().top - 70
-          }, 800);
+            scrollTop: offset
+          }, 800, 'swing', function() {
+            // 更新 URL hash
+            window.location.hash = target.selector;
+          });
         }
       });
 
       // 導航欄滾動效果
       $(window).on('scroll', function() {
-        if ($(window).scrollTop() > 100) {
+        const scrollTop = $(window).scrollTop();
+        if (scrollTop > 100) {
           $('.navbar').addClass('scrolled');
         } else {
           $('.navbar').removeClass('scrolled');
         }
+
+        // 更新當前活動的導航項
+        $('section').each(function() {
+          const sectionTop = $(this).offset().top - 100;
+          const sectionBottom = sectionTop + $(this).height();
+          if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+            const id = $(this).attr('id');
+            $('.nav-link').removeClass('active');
+            $(`.nav-link[href="#${id}"]`).addClass('active');
+          }
+        });
       });
 
       // 初始化頁面
@@ -832,6 +1009,47 @@
     updateProgress();
     updateLeaderboard();
     });
+
+    // 兌換獎勵
+    function redeemReward(rewardName, points) {
+      const member = prompt('請輸入要兌換獎勵的成員名稱：');
+      if (!member) return;
+
+      if (!members.includes(member)) {
+        alert('找不到該成員！');
+        return;
+      }
+
+      if ((points[member] || 0) < points) {
+        alert('積分不足！');
+        return;
+      }
+
+      if (confirm(`${member} 確定要兌換 ${rewardName} 嗎？將扣除 ${points} 分`)) {
+        points[member] -= points;
+        saveData();
+        renderMembers();
+        updateLeaderboard();
+        updateAchievements();
+
+        // 顯示兌換成功提示
+        const toast = $('<div>')
+          .addClass('toast show position-fixed bottom-0 end-0 m-3')
+          .attr('role', 'alert')
+          .html(`
+            <div class="toast-header bg-success text-white">
+              <i class="bi bi-gift me-2"></i>
+              <strong class="me-auto">兌換成功</strong>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+              ${member} 已兌換 ${rewardName} 成功！目前積分：${points[member]} 分
+            </div>
+          `);
+        $('body').append(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </body>
