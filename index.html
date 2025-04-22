@@ -382,67 +382,6 @@
     </div>
   </header>
 
-  <main class="container py-5">
-    <!-- 家事好處 -->
-    <section id="benefits" class="py-5">
-      <h2 class="section-title">作家事的好處</h2>
-      <div class="row g-4">
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100 fade-in">
-            <div class="card-body text-center">
-              <img src="https://cdn-icons-png.flaticon.com/512/4207/4207247.png" class="card-img-top mb-3" alt="責任感" style="height: 150px; object-fit: contain;">
-              <h5 class="card-title">培養責任感</h5>
-              <p class="card-text">讓孩子參與家務，培養責任感和獨立性，為未來生活做好準備。</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100 fade-in">
-            <div class="card-body text-center">
-              <img src="https://cdn-icons-png.flaticon.com/512/7066/7066140.png" class="card-img-top mb-3" alt="家庭和諧" style="height: 150px; object-fit: contain;">
-              <h5 class="card-title">增進家庭和諧</h5>
-              <p class="card-text">共同分擔家務，增進家人間的合作與理解，營造溫馨的家庭氛圍。</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100 fade-in">
-            <div class="card-body text-center">
-              <img src="https://cdn-icons-png.flaticon.com/512/4185/4185461.png" class="card-img-top mb-3" alt="生活技能" style="height: 150px; object-fit: contain;">
-              <h5 class="card-title">提升生活技能</h5>
-              <p class="card-text">學習實用的生活技能，為獨立生活打下堅實基礎。</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100 fade-in">
-            <div class="card-body text-center">
-              <img src="https://cdn-icons-png.flaticon.com/512/2382/2382461.png" class="card-img-top mb-3" alt="身心健康" style="height: 150px; object-fit: contain;">
-              <h5 class="card-title">促進身心健康</h5>
-              <p class="card-text">適度的家務勞動可以鍛煉身體，同時培養積極的生活態度。</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100 fade-in">
-            <div class="card-body text-center">
-              <img src="https://cdn-icons-png.flaticon.com/512/4575/4575590.png" class="card-img-top mb-3" alt="良好習慣" style="height: 150px; object-fit: contain;">
-              <h5 class="card-title">建立良好習慣</h5>
-              <p class="card-text">規律的家務安排幫助孩子養成良好的生活習慣和時間管理能力。</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card benefit-card h-100 fade-in">
-            <div class="card-body text-center">
-              <img src="https://cdn-icons-png.flaticon.com/512/9794/9794086.png" class="card-img-top mb-3" alt="成就感" style="height: 150px; object-fit: contain;">
-              <h5 class="card-title">增加成就感</h5>
-              <p class="card-text">完成家務任務帶來的成就感，增強自信心和自我價值感。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- 進度追蹤 -->
     <section class="py-5">
@@ -690,66 +629,69 @@
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
-    $(document).ready(function() {
+    // 等待 DOM 完全加載
+    $(function() {
       // 初始化數據
-      let members = JSON.parse(localStorage.getItem('members')) || [];
-      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-      let completed = JSON.parse(localStorage.getItem('completed')) || {};
-      let points = JSON.parse(localStorage.getItem('points')) || {};
+    let members = JSON.parse(localStorage.getItem('members')) || [];
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let completed = JSON.parse(localStorage.getItem('completed')) || {};
+    let points = JSON.parse(localStorage.getItem('points')) || {};
       let lineToken = localStorage.getItem('lineToken') || '';
 
       // 保存數據到 localStorage
-      function saveData() {
-        localStorage.setItem('members', JSON.stringify(members));
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        localStorage.setItem('completed', JSON.stringify(completed));
-        localStorage.setItem('points', JSON.stringify(points));
+    function saveData() {
+      localStorage.setItem('members', JSON.stringify(members));
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      localStorage.setItem('completed', JSON.stringify(completed));
+      localStorage.setItem('points', JSON.stringify(points));
         localStorage.setItem('lineToken', lineToken);
-      }
+    }
 
       // 添加成員
       $('#add-member-btn').on('click', function() {
         const name = $('#new-member').val().trim();
-        if (name && !members.includes(name)) {
-          members.push(name);
-          points[name] = 0;
+      if (name && !members.includes(name)) {
+        members.push(name);
+        points[name] = 0;
           $('#new-member').val('');
-          saveData();
-          renderMembers();
-        }
+        saveData();
+        renderMembers();
+      }
       });
 
       // 渲染成員列表
-      function renderMembers() {
+    function renderMembers() {
         const container = $('#member-list');
-        container.html(''); // 使用 html() 替代 empty()
-        members.forEach(name => {
-          const point = points[name] || 0;
-          container.append(`
-            <span class="badge bg-primary">${name}（${point} 分）</span>
-          `);
+        container.empty();
+      members.forEach(name => {
+        const point = points[name] || 0;
+          const badge = $('<span>')
+            .addClass('badge bg-primary me-2')
+            .text(`${name}（${point} 分）`);
+          container.append(badge);
         });
       }
 
       // 添加任務
       $('#add-task-btn').on('click', function() {
         const task = $('#new-task').val().trim();
-        if (task && !tasks.includes(task)) {
-          tasks.push(task);
+      if (task && !tasks.includes(task)) {
+        tasks.push(task);
           $('#new-task').val('');
-          saveData();
-          renderTasks();
-        }
+        saveData();
+        renderTasks();
+      }
       });
 
       // 渲染任務列表
       function renderTasks() {
         const container = $('#task-list');
-        container.html(''); // 使用 html() 替代 empty()
+        container.empty();
         tasks.forEach(task => {
-          container.append(`
-            <span class="badge bg-success">${task}</span>
-          `);
+          const badge = $('<span>')
+            .addClass('badge bg-success me-2')
+            .text(task);
+          container.append(badge);
         });
       }
 
@@ -763,46 +705,11 @@
         }
       });
 
-      // LINE 通知功能
-      async function sendLineNotification(message) {
-        if (!lineToken) {
-          console.log('LINE Token 未設置');
-          return;
-        }
-
-        try {
-          const response = await fetch('https://api.line.me/v2/bot/message/push', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${lineToken}`
-            },
-            body: JSON.stringify({
-              to: 'YOUR_USER_ID', // 需要替換為實際的用戶 ID
-              messages: [
-                {
-                  type: 'text',
-                  text: message
-                }
-              ]
-            })
-          });
-
-          if (!response.ok) {
-            throw new Error('發送通知失敗');
-          }
-        } catch (error) {
-          console.error('發送 LINE 通知時發生錯誤:', error);
-        }
-      }
-
       // 切換完成狀態
       function toggleComplete(id, member) {
         completed[id] = !completed[id];
         if (completed[id]) {
           points[member] = (points[member] || 0) + 1;
-          const task = id.split('-')[0];
-          sendLineNotification(`${member} 已完成家事：${task}！\n目前積分：${points[member]} 分`);
         } else {
           points[member] = Math.max(0, (points[member] || 0) - 1);
         }
@@ -814,77 +721,87 @@
       }
 
       // 生成輪班表
-      function generateSchedule() {
-        const days7 = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
+    function generateSchedule() {
+      const days7 = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
         const range = parseInt($('#range').val());
-        const days = Array.from({length: range}, (_, i) => range === 7 ? days7[i] : `第 ${i + 1} 天`);
+      const days = Array.from({length: range}, (_, i) => range === 7 ? days7[i] : `第 ${i + 1} 天`);
 
         const table = $('<table>').addClass('table table-bordered table-hover');
         const thead = $('<thead>');
         const headerRow = $('<tr>');
-        headerRow.append('<th class="sticky-column">家事</th>');
-        days.forEach(day => headerRow.append(`<th>${day}</th>`));
+        headerRow.append($('<th>').addClass('sticky-column').text('家事'));
+        days.forEach(day => headerRow.append($('<th>').text(day)));
         thead.append(headerRow);
 
         const tbody = $('<tbody>');
         tasks.forEach((task, index) => {
           const row = $('<tr>');
-          row.append(`<td class="sticky-column">${task}</td>`);
-          for (let i = 0; i < range; i++) {
-            const member = members[(index + i) % members.length] || '-';
-            const id = `${task}-${i}`;
-            const checked = completed[id] ? 'completed' : '';
-            const cell = $(`<td class="task-cell ${checked}">${member}</td>`);
-            cell.on('click', function() {
-              toggleComplete(id, member);
-            });
+          row.append($('<td>').addClass('sticky-column').text(task));
+          
+        for (let i = 0; i < range; i++) {
+          const member = members[(index + i) % members.length] || '-';
+          const id = `${task}-${i}`;
+          const checked = completed[id] ? 'completed' : '';
+            const cell = $('<td>')
+              .addClass(`task-cell ${checked}`)
+              .text(member)
+              .on('click', function() {
+                toggleComplete(id, member);
+              });
             row.append(cell);
           }
+          
           tbody.append(row);
         });
 
         table.append(thead).append(tbody);
-        $('#schedule-table').html('').append(table);
+        $('#schedule-table').empty().append(table);
       }
 
       // 下載輪班表
       $('#download-schedule').on('click', function() {
-        html2canvas(document.getElementById('schedule-table')).then(canvas => {
-          const link = document.createElement('a');
-          link.download = '家事輪班表.png';
-          link.href = canvas.toDataURL();
-          link.click();
-        });
+      html2canvas(document.getElementById('schedule-table')).then(canvas => {
+        const link = document.createElement('a');
+        link.download = '家事輪班表.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
       });
 
       // 更新進度
-      function updateProgress() {
+    function updateProgress() {
         const totalTasks = tasks.length * 7;
-        let completedTasks = 0;
-        
-        for (const id in completed) {
-          if (completed[id]) completedTasks++;
-        }
-        
-        const completionRate = Math.round((completedTasks / totalTasks) * 100);
+      let completedTasks = 0;
+      
+      for (const id in completed) {
+        if (completed[id]) completedTasks++;
+      }
+      
+      const completionRate = Math.round((completedTasks / totalTasks) * 100);
         $('#completion-rate').css('width', `${completionRate}%`);
         $('#completion-text').text(`本週已完成 ${completionRate}% 的家事`);
-      }
+    }
 
-      // 更新排行榜
-      function updateLeaderboard() {
+    // 更新排行榜
+    function updateLeaderboard() {
         const leaderboard = $('#leaderboard');
-        leaderboard.html(''); // 使用 html() 替代 empty()
-        
-        const sortedMembers = Object.entries(points)
-          .sort((a, b) => b[1] - a[1])
-          .map(([name, points]) => `
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>${name}</span>
-              <span class="badge bg-primary rounded-pill">${points} 分</span>
-            </div>
-          `);
-        
+        leaderboard.empty();
+      
+      const sortedMembers = Object.entries(points)
+        .sort((a, b) => b[1] - a[1])
+        .map(([name, points]) => {
+            const item = $('<div>')
+              .addClass('list-group-item d-flex justify-content-between align-items-center');
+            
+            item.append($('<span>').text(name));
+            item.append($('<span>')
+              .addClass('badge bg-primary rounded-pill')
+              .text(`${points} 分`)
+            );
+            
+          return item;
+        });
+      
         leaderboard.append(sortedMembers);
       }
 
@@ -909,11 +826,11 @@
       });
 
       // 初始化頁面
-      renderMembers();
-      renderTasks();
-      generateSchedule();
-      updateProgress();
-      updateLeaderboard();
+    renderMembers();
+    renderTasks();
+    generateSchedule();
+    updateProgress();
+    updateLeaderboard();
     });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
